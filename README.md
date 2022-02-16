@@ -176,3 +176,72 @@ dev.off()
 ![Chord_BP](https://user-images.githubusercontent.com/51151276/154196818-b8dc319b-1500-4b0a-8a0c-85552f79772f.png)
 
 
+## GO cirecle plot
+
+```
+png(paste0(output,"Circle_BP.png"),res = 600,width = 15,height = 8,units = "in")
+GOCircle(circ_BP)
+dev.off()
+
+png(paste0(output,"Circle_CC.png"),res = 600,width = 15,height = 8,units = "in")
+GOCircle(circ_CC)
+dev.off()
+
+png(paste0(output,"Circle_MF.png"),res = 600,width = 15,height = 8,units = "in")
+GOCircle(circ_MF)
+dev.off()
+```
+展示特定GO的概況。內圈表示Z-score外圈為 GO ID，中間紅色圓點代表表現量上升的Gene，欄典表示表現量下降的Gene，下半部有GO ID對照名稱
+
+![Circle_BP](https://user-images.githubusercontent.com/51151276/154221615-3cfe1214-efc3-4768-abab-c7b8599692b0.png)
+
+
+## GO cluster
+```
+chord<-chord_dat(data = circ_BP,genes = genedata) #生成含有選定基因的數據框
+
+png(paste0(output,"CirHeatmap_BP.png"),res = 600,width = 15,height = 15,units = "in")
+GOCluster(circ_BP,GOplotIn_BP$Term) #系統聚類圖
+dev.off()
+
+png(paste0(output,"CirHeatmap_CC.png"),res = 600,width = 15,height = 15,units = "in")
+GOCluster(circ_CC,GOplotIn_CC$Term) 
+dev.off()
+
+png(paste0(output,"CirHeatmap_MF.png"),res = 600,width = 15,height = 15,units = "in")
+GOCluster(circ_MF,GOplotIn_MF$Term) 
+dev.off()
+```
+展示Gene和GO之間cluster的概況。最內圈為Gene，中圏為基因差異表現量，紅色為基因表現量上升，藍色則表示基因表現量下降，最外圈為該基因屬於得GO term
+
+
+![CirHeatmap_BP](https://user-images.githubusercontent.com/51151276/154221865-55aecf2b-4da2-4696-bf53-e135407ee005.png)
+
+## GSEA ridgeplot
+```
+png(paste0(output,"ridgeplot.png"),res = 600,width = 15,height = 15,units = "in")
+ridgeplot(GSEA_GO) 
+dev.off()
+```
+展示之間的關係。Y軸代表一個geneset，X軸代表該geneset中基因的差異表現量 ，顏色代表p.adjusted，山脊群位置>0代表這個geneset屬於正調控基因群，<0代表負調控基因群
+
+![ridgeplot](https://user-images.githubusercontent.com/51151276/154222093-5cc6482b-20b0-4539-a0bf-2f312c5b8b0b.png)
+
+## GSEA gseaplot
+```
+png(paste0(output,"gseaplot.png"),res = 600,width = 15,height = 15,units = "in")
+gseaplot2(GSEA_GO,1)
+dev.off()
+
+```
+展示所有Geneset的概況。
+分三區:
+上區: 每條線代表一個geneset，Y軸代表enrichment score，若有基因會上升，反之則下降；上半部這些geneset裡的gene屬於正調控，下半部這些geneset裡的gene屬於負調控
+
+中區:各geneset中基因的位置，配合上區，若基因密集出現在左側，則一開始線條會急遽上升。
+
+下區:Y代表基因差異表現量，X代表該Gene依造基因差異表現量從高到低排序
+
+
+![gseaplot](https://user-images.githubusercontent.com/51151276/154221998-7f81c3b3-3b43-40f2-adb7-096ae012701a.png)
+
