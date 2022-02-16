@@ -171,7 +171,8 @@ dev.off()
 ```
 展示基因和GO term之間的關係。左半圈表示基因名稱,右半圈每個色帶代表一個GO term，並標示於下方,logFC表示基因差異倍數取log
 
-![CirHeatmap_BP](https://user-images.githubusercontent.com/51151276/154196508-8e1c74b6-32b6-4fdf-8674-e6902f28df80.png)
 
+
+![Chord_BP](https://user-images.githubusercontent.com/51151276/154196818-b8dc319b-1500-4b0a-8a0c-85552f79772f.png)
 
 
